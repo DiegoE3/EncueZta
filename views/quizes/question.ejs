@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8"><tittle>EncueZta</tittle>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+
+  <body>
+    <h2>Encuesta: el juego de las preguntas</h2>
+
+    <form method="get" action="/quizes/answer">
+      Pregunta: <%= pregunta %><br><br>
+      <input type="text" name="respuesta" value="Responda aquí"
+        onblur="if (this.value == '') {this.value = 'Responda aquí';}"
+        onfocus="if (this.value == 'Responda aquí') {this.value = '';}"
+      /><!-- Borra el value del formulario al hacer click, lo repuera al perder el foco-->
+      <input type="submit" value="Enviar">
+    </form>
+  </Body>
+</html>
