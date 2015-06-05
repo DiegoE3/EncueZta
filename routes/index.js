@@ -12,6 +12,8 @@ router.get('/quizes/question', quizController.question);
 router.get('/quizes/answer', quizController.answer);
 
 /*P2P obligatorio modulo 6, apartado 2b*/
-router.get('/author', quizController.author);
+router.get('/author', function(req,res){
+  res.render('author', {});
+});
 
 module.exports = router;
