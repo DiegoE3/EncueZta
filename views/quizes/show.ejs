@@ -1,5 +1,5 @@
-<form method="get" action="/quizes/answer">
-  Pregunta: <%= pregunta %> <p>
+<form method="get" action="/quizes/<%= quiz.id %>/answer">
+  Pregunta: <%= quiz.pregunta %> <p>
     <input type="text" name="respuesta" value="Responda aquí"
       onblur="if (this.value == '') {this.value = 'Responda aquí';}"
       onfocus="if (this.value == 'Responda aquí') {this.value = '';}"
