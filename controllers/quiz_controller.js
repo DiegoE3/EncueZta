@@ -14,11 +14,25 @@ exports.load = function(req, res, next, quizId){
 
 // GET /quizes/
 exports.index = function(req, res){
-  models.Quiz.findAll().then(
-    function(quizes){
-      res.render('quizes/index.ejs', {quizes: quizes});
-    }
-  ).catch(function(error) {next(error);});
+  //GET /quizes?busqueda
+  //Si busqueda contine algo realiza la búsqueda en el campo pregunta de la BBDD
+  //y lista las preguntas que coinciden con el patrón busqueda.
+  if (req.query.busqueda){
+    models.Quiz.findAll({ where: {"pregunta": {like: '%'+req.query.busqueda+'%' } },
+                          //Ordenación descendente , order: 'pregunta DESC'
+                          order: 'pregunta' }).then(
+      function(quizes){
+        res.render('quizes/index.ejs', {quizes: quizes});
+      }
+    ).catch(function(error) {next(error);});
+  //Si no, lista todas las preguntas
+  }else{
+    models.Quiz.findAll().then(
+      function(quizes){
+        res.render('quizes/index.ejs', {quizes: quizes});
+      }
+    ).catch(function(error) {next(error);});
+  }
 };
 
 // GET /quizes/:id
