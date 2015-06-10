@@ -15,16 +15,17 @@ exports.load = function(req, res, next, quizId){
 // GET /quizes/
 exports.index = function(req, res){
   //GET /quizes?busqueda
-  //Si busqueda contine algo realiza la búsqueda en el campo pregunta de la BBDD
+  //Si busqueda contine algo realiza la búsqueda en el campo pregunta de la BD
   //y lista las preguntas que coinciden con el patrón busqueda.
   if (req.query.busqueda){
-    models.Quiz.findAll({ where: {"pregunta": {like: '%'+req.query.busqueda+'%' } },
+    models.Quiz.findAll({ where: {"pregunta": {like: '%'+req.query.busqueda.replace(/ /g,'%')+'%' } },
+                          //el replace sustituye espacios por % --> / / <--expresión regular espacio en blanco g <--global
                           //Ordenación descendente , order: 'pregunta DESC'
                           order: 'pregunta' }).then(
-      function(quizes){
-        res.render('quizes/index.ejs', {quizes: quizes});
-      }
-    ).catch(function(error) {next(error);});
+                                                function(quizes){
+                                                  res.render('quizes/index.ejs', {quizes: quizes});
+                                                }
+                                               ).catch(function(error) {next(error);});
   //Si no, lista todas las preguntas
   }else{
     models.Quiz.findAll().then(
@@ -47,4 +48,22 @@ exports.answer = function(req, res){
     resultado = 'Correcto';
   }
   res.render('quizes/answer', {quiz: req.quiz, respuesta: resultado});
+};
+
+//GET /quizes/new
+exports.new = function(req, res){
+  var quiz = models.Quiz.build(  //Crea el objeto quiz
+    {pregunta: "pregunta", respuesta: "respuesta"}
+  );
+  res.render('quizes/new', {quiz: quiz});
+};
+
+// POST /quizes/create
+exports.create = function(req, res){
+  var quiz = models.Quiz.build( req.body.quiz );
+
+// guarda en la BD los campos pregunta y respuesta de quiz
+  quiz.save({fields: ["pregunta", "respuesta"]}).then(function(){
+    res.redirect('/quizes');
+  }); //Redirección HTTP (URL relativo) lista de preguntas
 };

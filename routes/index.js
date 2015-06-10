@@ -15,6 +15,11 @@ router.param('quizId', quizController.load); //autoload :quizId
 router.get('/quizes/',                      quizController.index);
 router.get('/quizes/:quizId(\\d+)',         quizController.show);
 router.get('/quizes/:quizId(\\d+)/answer',  quizController.answer);
+//Creación de nuevas preguntas
+//Primero un GET que solicite el formulario para introducir la nueva pregunta
+router.get('/quizes/new',                   quizController.new);
+//segundo un POST para modificar la BD
+router.post('/quizes/create',               quizController.create);
 
 /*P2P obligatorio modulo 6, apartado 2b*/
 router.get('/author', function(req,res){
