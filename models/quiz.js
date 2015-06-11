@@ -2,7 +2,14 @@
 
 module.exports = function(sequelize, Datatypes){
   return sequelize.define('tablaQuiz', {
-                                        pregunta: Datatypes.STRING,
-                                        respuesta: Datatypes.STRING,
-                                       });
+                                        pregunta: {
+                                          type: Datatypes.STRING,
+                                          validate: {notEmpty: {msg: "->Falta pregunta"} }
+                                        },
+                                        respuesta: {
+                                          type: Datatypes.STRING,
+                                          validate: {notEmpty: {msg: "->Falta respuesta"} }
+                                        }
+                                       }
+                         );
 };

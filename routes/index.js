@@ -5,7 +5,7 @@ var quizController = require('../controllers/quiz_controller');
 
 // Página de entrada (homepage)
 router.get('/', function(req, res) {
-  res.render('index', { title: 'EncueZta' });
+  res.render('index', { title: 'EncueZta', errors: [] });
 });
 
 //Autoload de comandos con :quizId
@@ -22,8 +22,6 @@ router.get('/quizes/new',                   quizController.new);
 router.post('/quizes/create',               quizController.create);
 
 /*P2P obligatorio modulo 6, apartado 2b*/
-router.get('/author', function(req,res){
-  res.render('author', {});
-});
+router.get('/author',                       quizController.author);
 
 module.exports = router;
