@@ -20,6 +20,8 @@ router.get('/quizes/:quizId(\\d+)/answer',  quizController.answer);
 router.get('/quizes/new',                   quizController.new);
 //segundo un POST para modificar la BD
 router.post('/quizes/create',               quizController.create);
+router.get('/quizes/:quizId(\\d+)/edit',    quizController.edit);
+router.put('/quizes/:quizId(\\d+)',         quizController.update);
 
 /*P2P obligatorio modulo 6, apartado 2b*/
 router.get('/author',                       quizController.author);
