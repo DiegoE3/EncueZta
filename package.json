@@ -6,7 +6,7 @@
     "start": "node ./bin/www"
   },
   "engines": {
-    "node:": "0.10.x",
+    "node": "0.10.x",
     "npm": "1.4.x"
   },
   "devDependencies": {
@@ -24,6 +24,7 @@
     "sequelize": "~2.0.0",
     "pg": "~4.1.1",
     "pg-hstore": "~2.3.2",
-    "method-override": "~2.3.1"
+    "method-override": "~2.3.1",
+    "express-session": "~1.11.3"
   }
 }

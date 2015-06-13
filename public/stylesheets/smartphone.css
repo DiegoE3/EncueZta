@@ -5,3 +5,9 @@ body                {background: #333;}
 h2 span, section h3 {display: none;}
 body                {font-size: xx-large;}
 footer, input       {font-size: large;}
+
+#tablaPreguntas       {margin: 0; padding: 0px;}
+td                    {margin: 0; padding: 0px;}
+#celdaPregunta        {text-align: left;}
+#barTitulo            {font: 10px Georgia, sans-serif;}
+#celdaTema            {background-color: #DBDBDB; font: 8px Georgia, sans-serif;}

@@ -6,3 +6,10 @@
      /><!-- Borra el value del formulario al hacer click, lo repuera al perder el foco-->
     <input type="submit" value="Enviar">
 </form>
+
+<p><a href="/quizes/<%= quiz.id %>/comments/new"><button>Nuevo comentario</button></a></p>
+
+<p><strong>Comentarios:</strong></p>
+<% for(index in quiz.tablaComentarios){ //recordar que sequelice pluraliza nombre de tablas %>
+  <p>- <%=quiz.tablaComentarios[index].texto%></p>
+<%}%>
