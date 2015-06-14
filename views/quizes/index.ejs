@@ -14,20 +14,24 @@
     <td></td>
     <td></td>
   </tr>
-<% var i; for (i=0; i < quizes.length; i++) { %>
+<% var i; for (i=0; i < quizes.length; i++) { //Rellena la tabla con las preguntas %>
   <tr>
     <td id="celdaTema"><%= quizes[i].tema %>: </td>
     <td id="celdaPregunta"><a href="quizes/<%= quizes[i].id %>"><%= quizes[i].pregunta %></a></td>
-    <td><a href="quizes/<%= quizes[i].id %>/edit"><button>editar</button></a></td>
-    <td>
-      <form method="post" action="quizes/<%= quizes[i].id %>?_method=delete">
-        <button type="submit" onClick="return confirm('Borrar: <%= quizes[i].pregunta %>');">
-          Borrar
-        </button>
-      </form>
-    </td>
+    <% if(session.user){ //Pone botones sólo si el usuario está autentificado %>
+      <td><a href="quizes/<%= quizes[i].id %>/edit"><button>editar</button></a></td>
+      <td>
+        <form method="post" action="quizes/<%= quizes[i].id %>?_method=delete">
+          <button type="submit" onClick="return confirm('Borrar: <%= quizes[i].pregunta %>');">
+            Borrar
+          </button>
+        </form>
+      </td>
+    <% } %>
   </tr>
 <% } %>
 </table>
 <p/>
-<a href="/quizes/new"><button type="button">Crear pregunta</button></a>
+<% if(session.user){ //Pone botones sólo si el usuario está autentificado %>
+  <a href="/quizes/new"><button type="button">Crear pregunta</button></a>
+<% } %>

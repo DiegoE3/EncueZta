@@ -23,7 +23,7 @@ app.use(favicon(__dirname + '/public/favicon.ico'));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
-app.use(cookieParser('Encuezta 2015'));
+app.use(cookieParser('Encuezta 2015')); //'Encuezta 2015' es una semilla, poco segura por cierto, para el cifrado de cookies.
 app.use(session());
 app.use(methodOverride('_method'));
 app.use(express.static(path.join(__dirname, 'public')));
