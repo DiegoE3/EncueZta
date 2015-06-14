@@ -11,5 +11,11 @@
 
 <p><strong>Comentarios:</strong></p>
 <% for(index in quiz.tablaComentarios){ //recordar que sequelice pluraliza nombre de tablas %>
-  <p>- <%=quiz.tablaComentarios[index].texto%></p>
-<%}%>
+  <% if(quiz.tablaComentarios[index].publicado || session.user){ %>
+    <p>- <%= quiz.tablaComentarios[index].texto %>
+      <% if(session.user && !quiz.tablaComentarios[index].publicado){ %>
+        <a href="/quizes/<%= quiz.id %>/comments/<%= quiz.tablaComentarios[index].id %>/publish"><button>Publicar</button></a>
+      <% } %>
+    </p>
+  <% } %>
+<% } %>
