@@ -28,6 +28,40 @@ app.use(session());
 app.use(methodOverride('_method'));
 app.use(express.static(path.join(__dirname, 'public')));
 
+//Limitando el tiempo de una sesión
+//Métodos 1 y 2 sólo funcionan con el parche de session_controller.js --Destruir la sesión
+//Método 1:
+//app.use(function(req, res, next) {
+//  req.session.cookie.expires = new Date(Date.now() + 5000);
+  //o
+//  req.session.cookie.maxAge = 5000;
+//  next();
+//});
+//Método 2:
+//ver session_controller.js en --Crear la sesión
+//Método 3:
+app.use(function(req, res, next) {
+  //Si hay un usuario logeado = existe una sesión
+  if(req.session.user){
+    //Si no lo hay, guarda el tiempo de inicio de sesión
+    if(!req.session.tiempoInicioSesion){
+      req.session.tiempoInicioSesion = (new Date()).getTime();
+      console.log(req.session.tiempoInicioSesion);
+    }else{
+      //Si el tiempo actual es mayor que el tiempo de incio de sesión, más 5 segundos
+      //se ha cumplido el tiempo de inactividad y entonces se destruye la sesión y tiempoInicioSesion
+      if((new Date()).getTime() > req.session.tiempoInicioSesion + 5000){
+        delete req.session.user;                //Destrucción de la sesión
+        req.session.tiempoInicioSesion = null;  //Destrucción de la variable 'tiempoInicioSesion'
+        //También hay que 'destruir' tiempoInicioSesion al hacer logout manual en session_controller.js --Destruir la sesión
+      }else{  //Si se realiza cualquier petición HTTP se reinicia el contador tiempoInicioSesion
+        req.session.tiempoInicioSesion = (new Date()).getTime();
+      }
+    }
+  }
+  next();
+});
+
 // Helpers dinámicos:
 app.use(function(req, res, next){
 
@@ -75,6 +109,5 @@ app.use(function(err, req, res, next) {
         errors: []
     });
 });
-
 
 module.exports = app;

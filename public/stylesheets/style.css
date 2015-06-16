@@ -14,11 +14,3 @@ td                    {padding: 5px;}
 #celdaPregunta        {text-align: left;}
 #celdaTema            {background-color: #DBDBDB; font: 14px Georgia, sans-serif;}
 #ErrorMsgs            {color: #f61; font-size: smaller}
-
-/*Centrando el vídeo*/
-#viddiv{
-  style="position: relative; width: 240px;"
-}
-#vid1{
-  margin: auto;
-}
