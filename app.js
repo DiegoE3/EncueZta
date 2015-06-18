@@ -48,9 +48,9 @@ app.use(function(req, res, next) {
       req.session.tiempoInicioSesion = (new Date()).getTime();
       console.log(req.session.tiempoInicioSesion);
     }else{
-      //Si el tiempo actual es mayor que el tiempo de incio de sesión, más 5 segundos
+      //Si el tiempo actual es mayor que el tiempo de incio de sesión, más 7 segundos
       //se ha cumplido el tiempo de inactividad y entonces se destruye la sesión y tiempoInicioSesion
-      if((new Date()).getTime() > req.session.tiempoInicioSesion + 5000){
+      if((new Date()).getTime() > req.session.tiempoInicioSesion + 7000){
         delete req.session.user;                //Destrucción de la sesión
         req.session.tiempoInicioSesion = null;  //Destrucción de la variable 'tiempoInicioSesion'
         //También hay que 'destruir' tiempoInicioSesion al hacer logout manual en session_controller.js --Destruir la sesión

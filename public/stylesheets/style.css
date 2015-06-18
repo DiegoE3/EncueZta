@@ -10,7 +10,10 @@ footer                {background: #eee; text-align: center;}
 nav span              {margin: 0px 10px 0px 0px;}
 
 #tablaPreguntas       {padding: 5px;}
-td                    {padding: 5px;}
+#tablaPreguntas td    {padding: 5px;}
 #celdaPregunta        {text-align: left;}
 #celdaTema            {background-color: #DBDBDB; font: 14px Georgia, sans-serif;}
 #ErrorMsgs            {color: #f61; font-size: smaller}
+
+#tablaEstadisticas td   {border: 1px dotted black; padding: 5px;}
+.titFila                {text-align: right;}
